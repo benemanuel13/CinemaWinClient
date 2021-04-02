@@ -30,6 +30,8 @@ namespace CinemaWinClient.Forms
         private void InitializeComponent()
         {
             this.saveFilm = new System.Windows.Forms.GroupBox();
+            this.filmCategories = new System.Windows.Forms.ComboBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.editFilmExtras = new System.Windows.Forms.Button();
             this.closeForm = new System.Windows.Forms.Button();
             this.saveFilmDetails = new System.Windows.Forms.Button();
@@ -44,8 +46,6 @@ namespace CinemaWinClient.Forms
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.geoConfirm = new System.Windows.Forms.Button();
             this.geoBlocks = new System.Windows.Forms.TreeView();
-            this.label5 = new System.Windows.Forms.Label();
-            this.filmCategories = new System.Windows.Forms.ComboBox();
             this.saveFilm.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +71,25 @@ namespace CinemaWinClient.Forms
             this.saveFilm.TabIndex = 0;
             this.saveFilm.TabStop = false;
             this.saveFilm.Text = "Film Details";
+            // 
+            // filmCategories
+            // 
+            this.filmCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.filmCategories.FormattingEnabled = true;
+            this.filmCategories.Location = new System.Drawing.Point(23, 166);
+            this.filmCategories.Name = "filmCategories";
+            this.filmCategories.Size = new System.Drawing.Size(224, 23);
+            this.filmCategories.TabIndex = 12;
+            this.filmCategories.SelectedIndexChanged += new System.EventHandler(this.filmCategories_SelectedIndexChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(23, 148);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(81, 15);
+            this.label5.TabIndex = 11;
+            this.label5.Text = "Film Category";
             // 
             // editFilmExtras
             // 
@@ -193,6 +212,7 @@ namespace CinemaWinClient.Forms
             this.geoConfirm.TabIndex = 1;
             this.geoConfirm.Text = "Confirm";
             this.geoConfirm.UseVisualStyleBackColor = true;
+            this.geoConfirm.Click += new System.EventHandler(this.geoConfirm_Click);
             // 
             // geoBlocks
             // 
@@ -201,25 +221,6 @@ namespace CinemaWinClient.Forms
             this.geoBlocks.Name = "geoBlocks";
             this.geoBlocks.Size = new System.Drawing.Size(399, 256);
             this.geoBlocks.TabIndex = 0;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 148);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(81, 15);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "Film Category";
-            // 
-            // filmCategories
-            // 
-            this.filmCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.filmCategories.FormattingEnabled = true;
-            this.filmCategories.Location = new System.Drawing.Point(23, 166);
-            this.filmCategories.Name = "filmCategories";
-            this.filmCategories.Size = new System.Drawing.Size(224, 23);
-            this.filmCategories.TabIndex = 12;
-            this.filmCategories.SelectedIndexChanged += new System.EventHandler(this.filmCategories_SelectedIndexChanged);
             // 
             // FilmForm
             // 

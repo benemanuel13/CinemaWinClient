@@ -13,6 +13,11 @@ using System.Threading.Tasks;
 using CinemaWinClient.Extensions;
 using Newtonsoft.Json.Linq;
 using System.IO;
+using Microsoft.Azure.Management.Media.Models;
+using Microsoft.Rest;
+using Microsoft.Rest.Azure.Authentication;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Azure.Management.Media;
 
 namespace CinemaWinClient.Forms
 {
@@ -51,6 +56,7 @@ namespace CinemaWinClient.Forms
         {
             //Film Categories Binding
             catBinding = await _apiService.GetFilmCategories();
+            //catBinding = catBinding.OrderBy(b => b.Description).ToList();
 
             catBindingSource = new BindingSource();
             catBindingSource.DataSource = catBinding;
@@ -372,6 +378,7 @@ namespace CinemaWinClient.Forms
         private void uploadFilm_Click(object sender, EventArgs e)
         {
             Film film = theFilms[films.SelectedItems[0].Index];
+            film.AssetName = Guid.NewGuid().ToString();
 
             UploadFilmForm form = new UploadFilmForm(this, _apiService, film, _config.Values.GetSection("AdminKey").Value);
 
@@ -389,6 +396,15 @@ namespace CinemaWinClient.Forms
             FilmCollection col = (FilmCollection)filmCollectionDropdown.SelectedItem;
 
             await ShowFilms(col.FilmCollectionID, filmSortColumn);
+        }
+
+        private void createFilmAsset_Click(object sender, EventArgs e)
+        {
+            Film film = theFilms[films.SelectedItems[0].Index];
+
+            EncodeFilmForm form = new EncodeFilmForm(film, _apiService, _config);
+
+            form.ShowDialog();
         }
     }
 }

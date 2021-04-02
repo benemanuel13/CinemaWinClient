@@ -26,6 +26,8 @@ namespace CinemaWinClient.Forms
         private BindingList<FilmCategory> catBinding;
         private BindingSource catBindingSource;
 
+        private List<Country> BlockedCountries;
+
         public FilmForm()
         {
             InitializeComponent();
@@ -65,7 +67,9 @@ namespace CinemaWinClient.Forms
                 filmDate.Value = film.Showing;
                 filmTime.Value = film.Showing;
 
-                filmCategories.SelectedItem = film.FilmCategory;
+                var index = filmCategories.Items;
+
+                filmCategories.SelectedItem = catBinding.Where(b => b.FilmCategoryID == film.FilmCategory.FilmCategoryID).First();
 
                 editFilmExtras.Enabled = true;
             }
@@ -76,6 +80,13 @@ namespace CinemaWinClient.Forms
             }
 
             this.film = film;
+
+            GetBlockedFilms();
+        }
+
+        private async void GetBlockedFilms()
+        {
+            BlockedCountries = await _apiService.GetBlockedFilms(film.FilmID);
         }
 
         private void GetFilmCategories()
@@ -95,6 +106,7 @@ namespace CinemaWinClient.Forms
             node.Tag = "ROOTND0";
             geoBlocks.AfterSelect += GeoBlocks_AfterSelect;
             geoBlocks.AfterCheck += GeoBlocks_AfterCheck;
+            
             node.Expand();
 
             List<Models.ApiModels.Region> regions = await _apiService.GetRegions();
@@ -119,6 +131,22 @@ namespace CinemaWinClient.Forms
             {
                 if (node.Tag.ToString().StartsWith("COUNTR"))
                 {
+                    string idStr = node.Tag.ToString().Substring(6, node.Tag.ToString().Length - 6);
+                    int id = int.Parse(idStr);
+
+                    if (e.Node.Checked)
+                    {
+                        BlockedCountries.Add(new Country() { 
+                            CountryID = id
+                        });
+                    }
+                    else
+                    {
+                        var blocked = BlockedCountries.Where(bc => bc.CountryID == id).FirstOrDefault();
+
+                        BlockedCountries.Remove(blocked);
+                    }
+
                     return;
                 }
 
@@ -194,7 +222,23 @@ namespace CinemaWinClient.Forms
                     {
                         var countryNode = node.Nodes.Add(country.Name);
                         countryNode.Tag = "COUNTR" + country.CountryID;
+
+                        var blocked = BlockedCountries.Where(bc => bc.CountryID == country.CountryID).FirstOrDefault();
+
+                        if (blocked != null)
+                        {
+                            checking = true;
+
+                            countryNode.Checked = true;
+
+                            checking = false;
+                        }
                     }
+                }
+                else if (node.Tag.ToString().StartsWith("COUNTR"))
+                {
+                    int id = GetNodeID(node.Tag.ToString());
+
                 }
             }
         }
@@ -211,6 +255,7 @@ namespace CinemaWinClient.Forms
             film.Title = filmTitle.Text;
             film.Rating = (Rating)filmRating.SelectedItem;
             film.Showing = filmDate.Value.Date + filmTime.Value.TimeOfDay;
+            film.FilmCategoryID = ((FilmCategory)filmCategories.SelectedItem).FilmCategoryID;
 
             Film newFilm = await _apiService.PostFilm(film);
 
@@ -237,7 +282,13 @@ namespace CinemaWinClient.Forms
 
             FilmCategory cat = (FilmCategory)box.SelectedItem;
 
-            film.FilmCategoryID = cat.FilmCategoryID;
+            if(cat != null)
+                film.FilmCategoryID = cat.FilmCategoryID;
+        }
+
+        private async void geoConfirm_Click(object sender, EventArgs e)
+        {
+            await _apiService.PostBlockedCountries(film.FilmID, BlockedCountries);
         }
     }
 }

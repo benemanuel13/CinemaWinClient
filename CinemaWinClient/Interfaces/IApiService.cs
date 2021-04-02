@@ -34,8 +34,13 @@ namespace CinemaWinClient.Interfaces
 
         Task<Models.ApiModels.FilmDetails> GetFilmDetails(int id);
 
+        Task DeleteFilmFile(int filmID);
+
         Task<string> PostFilmDetails(int filmID, FileType fileType, MultipartFormDataContent content);
 
         Task<bool> PostUpdateFilmDetails(Models.ApiModels.FilmDetails details);
+
+        Task<List<Country>> GetBlockedFilms(int id);
+        Task<bool> PostBlockedCountries(int id, List<Country> countries);
     }
 }

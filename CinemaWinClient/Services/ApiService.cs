@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace CinemaWinClient.Services
         public string AdminKey { get; set; }
 
 #if DEBUG
-        //public string BasePath { get; set; } = "https://6a8071e3c424.ngrok.io/";
+        //public string BasePath { get; set; } = "https://14022c667de7.ngrok.io/";
         public string BasePath { get; set; } = "https://ramsgatedigitalcinema.co.uk/";
 #else
         public string BasePath { get; set; } = "https://ramsgatedigitalcinema.co.uk/";
@@ -34,6 +35,7 @@ namespace CinemaWinClient.Services
         public async Task<BindingList<FilmCategory>> GetFilmCategories()
         {
             BindingList<FilmCategory> cats = await ApiGet<BindingList<FilmCategory>>(BasePath + "api/Admin/GetFilmCategories");
+            cats = new BindingList<FilmCategory>(cats.OrderBy(c => c.Description).ToList());
 
             return cats;
         }
@@ -41,6 +43,7 @@ namespace CinemaWinClient.Services
         public async Task<BindingList<FilmCollection>> GetFilmCollections()
         {
             BindingList<FilmCollection> cols = await ApiGet<BindingList<FilmCollection>>(BasePath + "api/Admin/GetFilmCollections");
+            cols = new BindingList<FilmCollection>(cols.OrderBy(c => c.Name).ToList());
 
             return cols;
         }
@@ -122,7 +125,20 @@ namespace CinemaWinClient.Services
             return resp;
         }
 
+        public async Task DeleteFilmFile(int filmID)
+        {
+            await ApiGet<string>(BasePath + "api/DeleteFilmFile", filmID);
+        }
 
+        public async Task<List<Country>> GetBlockedFilms(int id)
+        {
+            return await ApiGet<List<Country>>(BasePath + "api/Admin/GetBlockedFilms", id);
+        }
+
+        public async Task<bool> PostBlockedCountries(int id, List<Country> countries)
+        {
+            return await ApiSimplePost<List<Country>>(BasePath + "api/Admin/PostBlockedCountries?id=" + id, countries);
+        }
 
         #endregion
 

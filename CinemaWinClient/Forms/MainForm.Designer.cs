@@ -160,7 +160,7 @@ namespace CinemaWinClient.Forms
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Location = new System.Drawing.Point(578, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(745, 269);
+            this.groupBox2.Size = new System.Drawing.Size(745, 450);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Films";
@@ -168,7 +168,7 @@ namespace CinemaWinClient.Forms
             // uploadFilm
             // 
             this.uploadFilm.Enabled = false;
-            this.uploadFilm.Location = new System.Drawing.Point(475, 229);
+            this.uploadFilm.Location = new System.Drawing.Point(475, 405);
             this.uploadFilm.Name = "uploadFilm";
             this.uploadFilm.Size = new System.Drawing.Size(124, 23);
             this.uploadFilm.TabIndex = 7;
@@ -179,16 +179,17 @@ namespace CinemaWinClient.Forms
             // createFilmAsset
             // 
             this.createFilmAsset.Enabled = false;
-            this.createFilmAsset.Location = new System.Drawing.Point(605, 229);
+            this.createFilmAsset.Location = new System.Drawing.Point(605, 405);
             this.createFilmAsset.Name = "createFilmAsset";
             this.createFilmAsset.Size = new System.Drawing.Size(124, 23);
             this.createFilmAsset.TabIndex = 6;
             this.createFilmAsset.Text = "Create Asset";
             this.createFilmAsset.UseVisualStyleBackColor = true;
+            this.createFilmAsset.Click += new System.EventHandler(this.createFilmAsset_Click);
             // 
             // deleteFilm
             // 
-            this.deleteFilm.Location = new System.Drawing.Point(184, 229);
+            this.deleteFilm.Location = new System.Drawing.Point(184, 405);
             this.deleteFilm.Name = "deleteFilm";
             this.deleteFilm.Size = new System.Drawing.Size(75, 23);
             this.deleteFilm.TabIndex = 5;
@@ -198,7 +199,7 @@ namespace CinemaWinClient.Forms
             // editFilm
             // 
             this.editFilm.Enabled = false;
-            this.editFilm.Location = new System.Drawing.Point(103, 229);
+            this.editFilm.Location = new System.Drawing.Point(103, 405);
             this.editFilm.Name = "editFilm";
             this.editFilm.Size = new System.Drawing.Size(75, 23);
             this.editFilm.TabIndex = 4;
@@ -208,7 +209,7 @@ namespace CinemaWinClient.Forms
             // 
             // addFilm
             // 
-            this.addFilm.Location = new System.Drawing.Point(22, 229);
+            this.addFilm.Location = new System.Drawing.Point(22, 405);
             this.addFilm.Name = "addFilm";
             this.addFilm.Size = new System.Drawing.Size(75, 23);
             this.addFilm.TabIndex = 3;
@@ -230,7 +231,7 @@ namespace CinemaWinClient.Forms
             this.films.Location = new System.Drawing.Point(22, 66);
             this.films.MultiSelect = false;
             this.films.Name = "films";
-            this.films.Size = new System.Drawing.Size(707, 155);
+            this.films.Size = new System.Drawing.Size(707, 333);
             this.films.TabIndex = 2;
             this.films.UseCompatibleStateImageBehavior = false;
             this.films.View = System.Windows.Forms.View.Details;
