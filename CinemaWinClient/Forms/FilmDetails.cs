@@ -66,22 +66,26 @@ namespace CinemaWinClient.Forms
 
             FilmTitle.Text = details.Film.Title;
 
-            if (details.PosterUrl != null && details.PosterUrl != "")
+            try
             {
-                poster.Load(basePath + details.PosterUrl);
-                posterUrl = basePath + details.PosterUrl;
-            }
+                if (details.PosterUrl != null && details.PosterUrl != "")
+                {
+                    poster.Load(basePath + details.PosterUrl);
+                    posterUrl = basePath + details.PosterUrl;
+                }
 
-            if (details.DirectorPicUrl != null && details.DirectorPicUrl != "")
-            {
-                director.Load(basePath + details.DirectorPicUrl);
-                directorUrl = basePath + details.DirectorPicUrl;
-            }
+                if (details.DirectorPicUrl != null && details.DirectorPicUrl != "")
+                {
+                    director.Load(basePath + details.DirectorPicUrl);
+                    directorUrl = basePath + details.DirectorPicUrl;
+                }
 
-            if (details.TrailerUrl != null && details.TrailerUrl != "")
-            {
-                TrailerUploaded.Text = "Yes";
+                if (details.TrailerUrl != null && details.TrailerUrl != "")
+                {
+                    TrailerUploaded.Text = "Yes";
+                }
             }
+            catch { }
 
             Origin.Text = details.DirectorOrigin;
             Bio.Text = details.DirectorBio;
@@ -135,7 +139,10 @@ namespace CinemaWinClient.Forms
 
             using (var formDataContent = new MultipartFormDataContent())
             {
-                string fileName = Path.GetFileName(file);
+                string originalfileName = Path.GetFileName(file);
+
+                string extension = Path.GetExtension(file);
+                string fileName = Guid.NewGuid().ToString() + extension;
 
                 FileStream stream = File.OpenRead(file);
                 byte[] bytes = new byte[stream.Length];
@@ -153,23 +160,38 @@ namespace CinemaWinClient.Forms
                 formDataContent.Add(new ByteArrayContent(bytes), fileName, fileName);
                 formDataContent.Add(new StringContent("\"name\":\"ben\"", Encoding.UTF8, "application/json"), "name");
 
+                if (fileType == FileType.Trailer)
+                {
+                    uploadProgress.Text = "Uploading... Please Wait...";
+                }
+
                 string message = await _apiService.PostFilmDetails(filmID, fileType, formDataContent);
 
                 if (message.StartsWith("OK"))
                 {
+                    if (fileType == FileType.Trailer)
+                    {
+                        uploadProgress.Text = "Finished Uploading...";
+                    }
+
                     MessageBox.Show("Successfully Uploaded File", "Success");
 
                     fileName = message.Substring(2, message.Length - 2);
                 }
                 else
                 {
+                    if (fileType == FileType.Trailer)
+                    {
+                        uploadProgress.Text = "Upload Failed...";
+                    }
+
                     MessageBox.Show("Failed To Upload File: " + message, "Failure");
                     return;
                 }
                 
                 if (fileType == FileType.Poster)
                 {
-                    poster.Load(basePath + "/Posters/");
+                    poster.Load(basePath + "/Posters/" + fileName);
                 }
                 else if (fileType == FileType.Director)
                 {
@@ -338,6 +360,11 @@ namespace CinemaWinClient.Forms
         private void uploadTrailerButton_Click(object sender, EventArgs e)
         {
             UploadFile(details.FilmID, trailerFile, FileType.Trailer);
+        }
+
+        private void closeForm_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

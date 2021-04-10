@@ -17,7 +17,7 @@ namespace CinemaWinClient.Services
         public string AdminKey { get; set; }
 
 #if DEBUG
-        //public string BasePath { get; set; } = "https://14022c667de7.ngrok.io/";
+        //public string BasePath { get; set; } = "https://6171d97f0023.ngrok.io/";
         public string BasePath { get; set; } = "https://ramsgatedigitalcinema.co.uk/";
 #else
         public string BasePath { get; set; } = "https://ramsgatedigitalcinema.co.uk/";

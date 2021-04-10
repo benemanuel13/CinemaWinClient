@@ -62,6 +62,7 @@ namespace CinemaWinClient.Forms
                 newFilm = false;
 
                 filmTitle.Text = film.Title;
+                filmDirector.Text = film.Director;
                 filmRating.SelectedItem = film.Rating;
 
                 filmDate.Value = film.Showing;
@@ -77,6 +78,7 @@ namespace CinemaWinClient.Forms
             if (collection)
             {
                 editFilmExtras.Visible = false;
+                filmCategories.Enabled = false;
             }
 
             this.film = film;
@@ -253,6 +255,7 @@ namespace CinemaWinClient.Forms
         private async void saveFilmDetails_Click(object sender, EventArgs e)
         {
             film.Title = filmTitle.Text;
+            film.Director = filmDirector.Text;
             film.Rating = (Rating)filmRating.SelectedItem;
             film.Showing = filmDate.Value.Date + filmTime.Value.TimeOfDay;
             film.FilmCategoryID = ((FilmCategory)filmCategories.SelectedItem).FilmCategoryID;

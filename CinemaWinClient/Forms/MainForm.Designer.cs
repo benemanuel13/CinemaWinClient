@@ -52,6 +52,9 @@ namespace CinemaWinClient.Forms
             this.filmCollectionDropdown = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.deleteCollection = new System.Windows.Forms.Button();
+            this.encodeFilmCollection = new System.Windows.Forms.Button();
+            this.uploadFilmCollection = new System.Windows.Forms.Button();
             this.editCollection = new System.Windows.Forms.Button();
             this.cancelFilmCollection = new System.Windows.Forms.Button();
             this.newFilmCollection = new System.Windows.Forms.Button();
@@ -59,6 +62,7 @@ namespace CinemaWinClient.Forms
             this.saveCollection = new System.Windows.Forms.Button();
             this.filmCollections = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.exitProgram = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -75,7 +79,7 @@ namespace CinemaWinClient.Forms
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(267, 287);
+            this.groupBox1.Size = new System.Drawing.Size(267, 470);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Film Categories";
@@ -83,7 +87,7 @@ namespace CinemaWinClient.Forms
             // isViewable
             // 
             this.isViewable.AutoSize = true;
-            this.isViewable.Location = new System.Drawing.Point(15, 215);
+            this.isViewable.Location = new System.Drawing.Point(15, 374);
             this.isViewable.Name = "isViewable";
             this.isViewable.Size = new System.Drawing.Size(84, 19);
             this.isViewable.TabIndex = 6;
@@ -93,7 +97,7 @@ namespace CinemaWinClient.Forms
             // 
             // cancelFilmCategory
             // 
-            this.cancelFilmCategory.Location = new System.Drawing.Point(177, 246);
+            this.cancelFilmCategory.Location = new System.Drawing.Point(177, 405);
             this.cancelFilmCategory.Name = "cancelFilmCategory";
             this.cancelFilmCategory.Size = new System.Drawing.Size(75, 23);
             this.cancelFilmCategory.TabIndex = 5;
@@ -103,7 +107,7 @@ namespace CinemaWinClient.Forms
             // 
             // newFilmCategory
             // 
-            this.newFilmCategory.Location = new System.Drawing.Point(15, 246);
+            this.newFilmCategory.Location = new System.Drawing.Point(15, 405);
             this.newFilmCategory.Name = "newFilmCategory";
             this.newFilmCategory.Size = new System.Drawing.Size(75, 23);
             this.newFilmCategory.TabIndex = 4;
@@ -113,7 +117,7 @@ namespace CinemaWinClient.Forms
             // 
             // filmCategory
             // 
-            this.filmCategory.Location = new System.Drawing.Point(15, 182);
+            this.filmCategory.Location = new System.Drawing.Point(15, 345);
             this.filmCategory.Name = "filmCategory";
             this.filmCategory.Size = new System.Drawing.Size(237, 23);
             this.filmCategory.TabIndex = 3;
@@ -122,7 +126,7 @@ namespace CinemaWinClient.Forms
             // saveCategory
             // 
             this.saveCategory.Enabled = false;
-            this.saveCategory.Location = new System.Drawing.Point(96, 246);
+            this.saveCategory.Location = new System.Drawing.Point(96, 405);
             this.saveCategory.Name = "saveCategory";
             this.saveCategory.Size = new System.Drawing.Size(75, 23);
             this.saveCategory.TabIndex = 2;
@@ -136,7 +140,7 @@ namespace CinemaWinClient.Forms
             this.filmCategories.ItemHeight = 15;
             this.filmCategories.Location = new System.Drawing.Point(15, 22);
             this.filmCategories.Name = "filmCategories";
-            this.filmCategories.Size = new System.Drawing.Size(237, 154);
+            this.filmCategories.Size = new System.Drawing.Size(237, 304);
             this.filmCategories.TabIndex = 1;
             this.filmCategories.SelectedIndexChanged += new System.EventHandler(this.filmCategories_SelectedIndexChanged);
             // 
@@ -160,7 +164,7 @@ namespace CinemaWinClient.Forms
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Location = new System.Drawing.Point(578, 12);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(745, 450);
+            this.groupBox2.Size = new System.Drawing.Size(745, 470);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Films";
@@ -284,6 +288,9 @@ namespace CinemaWinClient.Forms
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.deleteCollection);
+            this.groupBox3.Controls.Add(this.encodeFilmCollection);
+            this.groupBox3.Controls.Add(this.uploadFilmCollection);
             this.groupBox3.Controls.Add(this.editCollection);
             this.groupBox3.Controls.Add(this.cancelFilmCollection);
             this.groupBox3.Controls.Add(this.newFilmCollection);
@@ -293,14 +300,45 @@ namespace CinemaWinClient.Forms
             this.groupBox3.Controls.Add(this.label3);
             this.groupBox3.Location = new System.Drawing.Point(295, 12);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(267, 287);
+            this.groupBox3.Size = new System.Drawing.Size(267, 470);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Film Collections";
             // 
+            // deleteCollection
+            // 
+            this.deleteCollection.Enabled = false;
+            this.deleteCollection.Location = new System.Drawing.Point(96, 405);
+            this.deleteCollection.Name = "deleteCollection";
+            this.deleteCollection.Size = new System.Drawing.Size(75, 23);
+            this.deleteCollection.TabIndex = 9;
+            this.deleteCollection.Text = "Delete";
+            this.deleteCollection.UseVisualStyleBackColor = true;
+            // 
+            // encodeFilmCollection
+            // 
+            this.encodeFilmCollection.Enabled = false;
+            this.encodeFilmCollection.Location = new System.Drawing.Point(96, 434);
+            this.encodeFilmCollection.Name = "encodeFilmCollection";
+            this.encodeFilmCollection.Size = new System.Drawing.Size(156, 23);
+            this.encodeFilmCollection.TabIndex = 8;
+            this.encodeFilmCollection.Text = "Create Asset";
+            this.encodeFilmCollection.UseVisualStyleBackColor = true;
+            // 
+            // uploadFilmCollection
+            // 
+            this.uploadFilmCollection.Enabled = false;
+            this.uploadFilmCollection.Location = new System.Drawing.Point(15, 434);
+            this.uploadFilmCollection.Name = "uploadFilmCollection";
+            this.uploadFilmCollection.Size = new System.Drawing.Size(75, 23);
+            this.uploadFilmCollection.TabIndex = 7;
+            this.uploadFilmCollection.Text = "Upload";
+            this.uploadFilmCollection.UseVisualStyleBackColor = true;
+            this.uploadFilmCollection.Click += new System.EventHandler(this.uploadFilmCollection_Click);
+            // 
             // editCollection
             // 
-            this.editCollection.Location = new System.Drawing.Point(15, 240);
+            this.editCollection.Location = new System.Drawing.Point(15, 405);
             this.editCollection.Name = "editCollection";
             this.editCollection.Size = new System.Drawing.Size(75, 23);
             this.editCollection.TabIndex = 6;
@@ -310,7 +348,7 @@ namespace CinemaWinClient.Forms
             // 
             // cancelFilmCollection
             // 
-            this.cancelFilmCollection.Location = new System.Drawing.Point(177, 211);
+            this.cancelFilmCollection.Location = new System.Drawing.Point(177, 376);
             this.cancelFilmCollection.Name = "cancelFilmCollection";
             this.cancelFilmCollection.Size = new System.Drawing.Size(75, 23);
             this.cancelFilmCollection.TabIndex = 5;
@@ -320,7 +358,7 @@ namespace CinemaWinClient.Forms
             // 
             // newFilmCollection
             // 
-            this.newFilmCollection.Location = new System.Drawing.Point(15, 211);
+            this.newFilmCollection.Location = new System.Drawing.Point(15, 376);
             this.newFilmCollection.Name = "newFilmCollection";
             this.newFilmCollection.Size = new System.Drawing.Size(75, 23);
             this.newFilmCollection.TabIndex = 4;
@@ -330,7 +368,7 @@ namespace CinemaWinClient.Forms
             // 
             // filmCollection
             // 
-            this.filmCollection.Location = new System.Drawing.Point(15, 182);
+            this.filmCollection.Location = new System.Drawing.Point(15, 347);
             this.filmCollection.Name = "filmCollection";
             this.filmCollection.Size = new System.Drawing.Size(237, 23);
             this.filmCollection.TabIndex = 3;
@@ -339,7 +377,7 @@ namespace CinemaWinClient.Forms
             // saveCollection
             // 
             this.saveCollection.Enabled = false;
-            this.saveCollection.Location = new System.Drawing.Point(96, 211);
+            this.saveCollection.Location = new System.Drawing.Point(96, 376);
             this.saveCollection.Name = "saveCollection";
             this.saveCollection.Size = new System.Drawing.Size(75, 23);
             this.saveCollection.TabIndex = 2;
@@ -353,7 +391,7 @@ namespace CinemaWinClient.Forms
             this.filmCollections.ItemHeight = 15;
             this.filmCollections.Location = new System.Drawing.Point(15, 22);
             this.filmCollections.Name = "filmCollections";
-            this.filmCollections.Size = new System.Drawing.Size(237, 154);
+            this.filmCollections.Size = new System.Drawing.Size(237, 304);
             this.filmCollections.TabIndex = 1;
             this.filmCollections.SelectedIndexChanged += new System.EventHandler(this.filmCollections_SelectedIndexChanged);
             // 
@@ -365,11 +403,22 @@ namespace CinemaWinClient.Forms
             this.label3.Size = new System.Drawing.Size(0, 15);
             this.label3.TabIndex = 0;
             // 
+            // exitProgram
+            // 
+            this.exitProgram.Location = new System.Drawing.Point(1177, 488);
+            this.exitProgram.Name = "exitProgram";
+            this.exitProgram.Size = new System.Drawing.Size(146, 23);
+            this.exitProgram.TabIndex = 3;
+            this.exitProgram.Text = "Exit Program";
+            this.exitProgram.UseVisualStyleBackColor = true;
+            this.exitProgram.Click += new System.EventHandler(this.exitProgram_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1356, 533);
+            this.Controls.Add(this.exitProgram);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -421,5 +470,9 @@ namespace CinemaWinClient.Forms
         private System.Windows.Forms.ColumnHeader columnHeader5;
         private System.Windows.Forms.CheckBox isViewable;
         private System.Windows.Forms.Button editCollection;
+        private System.Windows.Forms.Button encodeFilmCollection;
+        private System.Windows.Forms.Button uploadFilmCollection;
+        private System.Windows.Forms.Button deleteCollection;
+        private System.Windows.Forms.Button exitProgram;
     }
 }

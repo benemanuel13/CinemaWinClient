@@ -46,12 +46,16 @@ namespace CinemaWinClient.Forms
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.geoConfirm = new System.Windows.Forms.Button();
             this.geoBlocks = new System.Windows.Forms.TreeView();
+            this.label6 = new System.Windows.Forms.Label();
+            this.filmDirector = new System.Windows.Forms.TextBox();
             this.saveFilm.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // saveFilm
             // 
+            this.saveFilm.Controls.Add(this.label6);
+            this.saveFilm.Controls.Add(this.filmDirector);
             this.saveFilm.Controls.Add(this.filmCategories);
             this.saveFilm.Controls.Add(this.label5);
             this.saveFilm.Controls.Add(this.editFilmExtras);
@@ -222,6 +226,22 @@ namespace CinemaWinClient.Forms
             this.geoBlocks.Size = new System.Drawing.Size(399, 256);
             this.geoBlocks.TabIndex = 0;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(265, 148);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(49, 15);
+            this.label6.TabIndex = 2;
+            this.label6.Text = "Director";
+            // 
+            // filmDirector
+            // 
+            this.filmDirector.Location = new System.Drawing.Point(265, 166);
+            this.filmDirector.Name = "filmDirector";
+            this.filmDirector.Size = new System.Drawing.Size(157, 23);
+            this.filmDirector.TabIndex = 3;
+            // 
             // FilmForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -261,5 +281,7 @@ namespace CinemaWinClient.Forms
         private System.Windows.Forms.Button editFilmExtras;
         private System.Windows.Forms.ComboBox filmCategories;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox filmDirector;
     }
 }

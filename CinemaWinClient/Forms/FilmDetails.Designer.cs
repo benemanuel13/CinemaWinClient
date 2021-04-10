@@ -64,11 +64,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.closeForm = new System.Windows.Forms.Button();
             this.saveDirectorButton = new System.Windows.Forms.Button();
             this.Bio = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.Origin = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.uploadProgress = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.still3)).BeginInit();
@@ -190,6 +193,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.uploadProgress);
+            this.groupBox2.Controls.Add(this.label7);
             this.groupBox2.Controls.Add(this.uploadTrailerButton);
             this.groupBox2.Controls.Add(this.selectTrailerButton);
             this.groupBox2.Controls.Add(this.TrailerUploaded);
@@ -449,6 +454,7 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.closeForm);
             this.groupBox3.Controls.Add(this.saveDirectorButton);
             this.groupBox3.Controls.Add(this.Bio);
             this.groupBox3.Controls.Add(this.label9);
@@ -461,9 +467,19 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Director";
             // 
+            // closeForm
+            // 
+            this.closeForm.Location = new System.Drawing.Point(260, 269);
+            this.closeForm.Name = "closeForm";
+            this.closeForm.Size = new System.Drawing.Size(106, 23);
+            this.closeForm.TabIndex = 5;
+            this.closeForm.Text = "Close Form";
+            this.closeForm.UseVisualStyleBackColor = true;
+            this.closeForm.Click += new System.EventHandler(this.closeForm_Click);
+            // 
             // saveDirectorButton
             // 
-            this.saveDirectorButton.Location = new System.Drawing.Point(291, 271);
+            this.saveDirectorButton.Location = new System.Drawing.Point(179, 269);
             this.saveDirectorButton.Name = "saveDirectorButton";
             this.saveDirectorButton.Size = new System.Drawing.Size(75, 23);
             this.saveDirectorButton.TabIndex = 4;
@@ -505,6 +521,26 @@
             this.label8.Size = new System.Drawing.Size(41, 15);
             this.label8.TabIndex = 0;
             this.label8.Text = "Origin";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label7.Location = new System.Drawing.Point(24, 523);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(58, 15);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Progress:";
+            // 
+            // uploadProgress
+            // 
+            this.uploadProgress.AutoSize = true;
+            this.uploadProgress.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.uploadProgress.Location = new System.Drawing.Point(135, 523);
+            this.uploadProgress.Name = "uploadProgress";
+            this.uploadProgress.Size = new System.Drawing.Size(42, 15);
+            this.uploadProgress.TabIndex = 22;
+            this.uploadProgress.Text = "(none)";
             // 
             // FilmDetails
             // 
@@ -580,5 +616,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button uploadTrailerButton;
         private System.Windows.Forms.Button selectTrailerButton;
+        private System.Windows.Forms.Button closeForm;
+        private System.Windows.Forms.Label uploadProgress;
+        private System.Windows.Forms.Label label7;
     }
 }

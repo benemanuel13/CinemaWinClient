@@ -94,6 +94,8 @@ namespace CinemaWinClient.Forms
         {
             theFilms = await _apiService.GetFilms(filmCollectionID);
 
+            theFilms = theFilms.Where(f => f.FilmCategory.Description != Film.SHORT_COLLECTION).ToList();
+
             if (sortColumn == 1)
             {
                 theFilms = theFilms.OrderBy(f => f.Rating).ToList();
@@ -203,13 +205,15 @@ namespace CinemaWinClient.Forms
 
             saveCollection.Enabled = false;
             saveCollection.Text = "Save";
+
+            deleteCollection.Enabled = false;
         }
 
         private async void saveCollection_Click(object sender, EventArgs e)
         {
             FilmCollection col = null;
 
-            if (newCategory)
+            if (newCollection)
             {
                 col = new FilmCollection()
                 {
@@ -232,8 +236,13 @@ namespace CinemaWinClient.Forms
 
                 col.FilmCollectionID = newcol.FilmCollectionID;
                 col.Name = newcol.Name;
+                col.Film = newcol.Film;
+                col.FilmID = newcol.FilmID;
 
                 filmCollections.SelectedIndex = filmCollections.Items.Count - 1;
+
+                colDropBinding.Add(newcol);
+                colDropBindingSource.ResetBindings(true);
             }
             else
             {
@@ -266,6 +275,26 @@ namespace CinemaWinClient.Forms
 
             saveCollection.Enabled = false;
             saveCollection.Text = "Update";
+
+            Film film = col.Film;
+
+            if (!film.Uploaded)
+            {
+                uploadFilmCollection.Enabled = true;
+                createFilmAsset.Enabled = false;
+            }
+            else if (!film.AssetCreated)
+            {
+                uploadFilmCollection.Enabled = false;
+                createFilmAsset.Enabled = true;
+            }
+            else
+            {
+                uploadFilmCollection.Enabled = false;
+                createFilmAsset.Enabled = false;
+            }
+
+            deleteCollection.Enabled = true;
         }
 
         private void addFilm_Click(object sender, EventArgs e)
@@ -273,6 +302,7 @@ namespace CinemaWinClient.Forms
             Film newFilm = new Film() { 
                 Rating= Rating.Universal,
                 Showing = DateTime.Parse("03/06/2021 17:00"),
+                Uploaded = false,
                 AssetCreated = false
             };
 
@@ -292,6 +322,11 @@ namespace CinemaWinClient.Forms
             ListView list = (ListView)sender;
 
             editFilm.Enabled = true;
+
+            if (list.SelectedItems.Count == 0)
+            {
+                return;
+            }
 
             Film film = theFilms[list.SelectedItems[0].Index];
 
@@ -319,6 +354,25 @@ namespace CinemaWinClient.Forms
             FilmCollection col = (FilmCollection)box.SelectedItem;
 
             await ShowFilms(col.FilmCollectionID);
+
+            if (col.Film != null)
+            {
+                if (col.Film.FilmCategory.Description == Film.SHORT_COLLECTION)
+                {
+                    uploadFilm.Visible = false;
+                    createFilmAsset.Visible = false;
+                }
+                else
+                {
+                    uploadFilm.Visible = true;
+                    createFilmAsset.Visible = true;
+                }
+            }
+            else
+            {
+                uploadFilm.Visible = true;
+                createFilmAsset.Visible = true;
+            }
         }
 
         private void editFilm_Click(object sender, EventArgs e)
@@ -367,7 +421,7 @@ namespace CinemaWinClient.Forms
 
         private async void editCollection_Click(object sender, EventArgs e)
         {
-            FilmCollection col = (FilmCollection)filmCollectionDropdown.SelectedItem;
+            FilmCollection col = (FilmCollection)filmCollections.SelectedItem;
 
             Film film = await _apiService.GetFilm(col.FilmID);
 
@@ -405,6 +459,23 @@ namespace CinemaWinClient.Forms
             EncodeFilmForm form = new EncodeFilmForm(film, _apiService, _config);
 
             form.ShowDialog();
+        }
+
+        private void uploadFilmCollection_Click(object sender, EventArgs e)
+        {
+            FilmCollection col = (FilmCollection)filmCollections.SelectedItem;
+            Film film = col.Film;
+
+            film.AssetName = Guid.NewGuid().ToString();
+
+            UploadFilmForm form = new UploadFilmForm(this, _apiService, film, _config.Values.GetSection("AdminKey").Value);
+
+            form.ShowDialog();
+        }
+
+        private void exitProgram_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -17,10 +17,14 @@ namespace CinemaWinClient.Models.ApiModels
 
     public class Film
     {
+        public static string SHORT_COLLECTION = "Short Collection";
+
         public int FilmID { get; set; }
 
         public bool Uploaded { get; set; }
         public bool AssetCreated { get; set; }
+
+        public string Director { get; set; }
 
         public string Title { get; set; }
 
