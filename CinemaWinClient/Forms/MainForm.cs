@@ -114,11 +114,16 @@ namespace CinemaWinClient.Forms
             foreach (var film in theFilms)
             {
                 var item = films.Items.Add(film.Title);
+                item.UseItemStyleForSubItems = false;
 
                 item.SubItems.Add(film.Rating.GetDescription());
                 item.SubItems.Add(film.Showing.ToString("dd MMM yyyy HH:mm"));
-                item.SubItems.Add(film.Uploaded ? "Yes" : "No");
-                item.SubItems.Add(film.AssetCreated ? "Yes" : "No");
+
+                var uploaded = item.SubItems.Add(film.Uploaded ? "Yes" : "No");
+                uploaded.ForeColor = film.Uploaded ? Color.Green : Color.Red;
+
+                var asset = item.SubItems.Add(film.AssetCreated ? "Yes" : "No");
+                asset.ForeColor = film.AssetCreated ? Color.Green : Color.Red;
             }
         }
 
