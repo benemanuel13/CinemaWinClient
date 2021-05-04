@@ -387,12 +387,14 @@ namespace CinemaWinClient.Forms
             // 
             // filmCollections
             // 
+            this.filmCollections.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawVariable;
             this.filmCollections.FormattingEnabled = true;
             this.filmCollections.ItemHeight = 15;
             this.filmCollections.Location = new System.Drawing.Point(15, 22);
             this.filmCollections.Name = "filmCollections";
             this.filmCollections.Size = new System.Drawing.Size(237, 304);
             this.filmCollections.TabIndex = 1;
+            this.filmCollections.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.DrawCollectionItem);
             this.filmCollections.SelectedIndexChanged += new System.EventHandler(this.filmCollections_SelectedIndexChanged);
             // 
             // label3

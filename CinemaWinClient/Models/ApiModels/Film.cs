@@ -46,5 +46,8 @@ namespace CinemaWinClient.Models.ApiModels
 
         public int Booked { get; set; }
         public int Watched { get; set; }
+
+        public FilmDetails FilmDetails { get; set; }
+
     }
 }

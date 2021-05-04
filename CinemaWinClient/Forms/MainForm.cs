@@ -50,6 +50,35 @@ namespace CinemaWinClient.Forms
             _apiService.AdminKey = _config.Values.GetSection("AdminKey").Value;
 
             InitializeComponent();
+
+            filmCollections.DrawItem += new DrawItemEventHandler(FilmCollections_DrawItem);
+        }
+
+        private void FilmCollections_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            Graphics g = e.Graphics;
+            FilmCollection col = (this.filmCollections.Items[e.Index] as FilmCollection);
+
+            Color textColor = Color.Red;
+
+            if (col.Film.Uploaded && col.Film.AssetCreated)
+            {
+                textColor = Color.Green;
+            }
+            else if (col.Film.Uploaded)
+            {
+                textColor = Color.Blue;
+            }
+
+            SolidBrush foregroundBrush = new SolidBrush(textColor);
+            string text = col.Name;
+            Font textFont = e.Font;
+            RectangleF rectangle = new RectangleF(new PointF(e.Bounds.X, e.Bounds.Y), new SizeF(e.Bounds.Width, g.MeasureString(text, textFont).Height));
+
+            g.DrawString(text, textFont, foregroundBrush, rectangle);
+
+            foregroundBrush.Dispose();
+            g.Dispose();
         }
 
         private async void MainForm_Load(object sender, EventArgs e)
@@ -114,6 +143,18 @@ namespace CinemaWinClient.Forms
             foreach (var film in theFilms)
             {
                 var item = films.Items.Add(film.Title);
+                Color detailsColor = Color.Green;
+
+                if (film.FilmDetails == null)
+                {
+                    detailsColor = Color.Red;
+                }
+                else if (film.FilmDetails.TrailerUrl == null)
+                {
+                    detailsColor = Color.Purple;
+                }
+
+                item.ForeColor = detailsColor;
                 item.UseItemStyleForSubItems = false;
 
                 item.SubItems.Add(film.Rating.GetDescription());
@@ -481,6 +522,11 @@ namespace CinemaWinClient.Forms
         private void exitProgram_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void DrawCollectionItem(object sender, DrawItemEventArgs e)
+        {
+            
         }
     }
 }
